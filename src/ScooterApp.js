@@ -16,62 +16,43 @@ registerUser(username, password, age) {
 }
 
 loginUser(username,password) {
-    if (this.registeredUsers[username] === null) throw new Error("Username or password is incorrect");
-    if (this.registeredUsers[username].password != password) throw new Error("Username or password is incorrect");
+  if (this.registeredUsers[username] === null) throw new Error("Username or password is incorrect");
+  if (this.registeredUsers[username].password != password) throw new Error("Username or password is incorrect");
+  this.registeredUsers[username].login(password);
 
-    // Locate the registered user by name and call its login method.
-    // Log to the console that the user has been logged in.
-
-    // If the user cannot be located or if the password is incorrect,
-    // then throw an error: Username or password is incorrect.
 
 }
 
-
-
-// logoutUser(username)
-
-// Locate the registered user and call its logout method. Log user is logged out to the console.
-
-// If the user cannot be located, throw no such user is logged in error
+logoutUser(username) {
+  if (this.registeredUsers[username] === null) throw new Error("no such user is logged in");
+  this.registerUsers[username].logoutUser();
+  console.log("user is logged out");
+}
 
 createScooter(station) {
-  if (!this.stations.includes(station)) throw new Error("no such station");
-  let scooter = new Scooter(station);
-  
-  // Create a new scooter, add it to the station’s scooter list, 
-  // and set its station property. Log created new scooter to the console. 
-  // Return the scooter. 
-
-
+  if (this.stations[station] === null) throw new Error("no such station");
+  this.stations[station].push(new Scooter(station));
 }
 
 dockScooter(scooter, station) {
+  if (this.stations[station] === null) throw new Error("no such station");
+  if (this.stations[station].includes(scooter)) throw new Error("scooter already at station");
   this.stations[station].push(scooter);
+  console.log("scooter is docked");
 }
-// Add the scooter to the station’s scooter list, and dock it. 
 
-// Log scooter is docked to the console.  
+rentScooter(scooter, user) {
+  if (scooter.user != null) throw new Error("scooter already rented");
+  this.stations[scooter.station].splice(indexOf(scooter),1);
+  scooter.user = user;
+  console.log("scooter is rented");
+}
 
-// Throws no such station error if the station does not exist. 
+print() {
+  console.log(this.registerUsers);
+  console.log(this.stations);
+}
 
-// Throws scooter already at station error if the scooter is already there.
-
-// rentScooter(scooter, user)
-
-// Locate the given scooter at one of the stations, and remove it from that station. Rent it to the user. Log scooter is rented to the console. 
-
-// If the scooter is already rented, throw the error scooter already rented.
-
-// print()
-
-// You will use this handy method when testing your ScooterApp.
-
-// Log the list of registered users to the console.
-
-// Log the list of stations and how many scooters are at each station to the console.
-
-// Take a moment to format it nicely so you can read it.
 }
 
 module.exports = ScooterApp
