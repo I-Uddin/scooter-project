@@ -1,3 +1,5 @@
+const User = require("./User");
+
 class Scooter {
   // scooter code here
   static nextSerial = 0;
@@ -11,11 +13,11 @@ class Scooter {
   }
 
 
-  rent() {
+  rent(user) {
     if (this.charge < 20) throw new Error("scooter needs to charge");
     if (this.isBroken) throw new Error("scooter needs repair");
     this.station = null;
-    this.user = "user";
+    this.user = user;
   }
 
   dock(station) {

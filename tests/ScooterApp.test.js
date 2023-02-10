@@ -6,6 +6,12 @@ describe("ScooterApp tests", () => {
 
     beforeAll(() => {
         testScooterApp = new ScooterApp({"St Pancras": [], "Canary Wharf": [], "Paddington": []}, {"Gary": new User("Gary", "Password", 21), "Steve":new User("Steve", "pass", 12)})
+        testScooterApp.createScooter("St Pancras");
+        testScooterApp.createScooter("St Pancras");
+        testScooterApp.createScooter("Canary Wharf");
+        testScooterApp.createScooter("Canary Wharf");
+        testScooterApp.createScooter("Paddington");
+        testScooterApp.print();
     });
 
     // ScooterApp tests here
@@ -22,5 +28,5 @@ describe("ScooterApp tests", () => {
     // rent scooter
     
     // dock scooter
-    
+
 });
