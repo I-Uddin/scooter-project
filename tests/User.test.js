@@ -3,10 +3,10 @@ const User = require('../src/User')
 // User tests here
 describe("User tests", () => {
 
+    // User class username, password, age, and loggedIn properties initialized correctly
     beforeAll(() => {
         testUser = new User("Testy", "password", 21);
       });
-
     // test username
     it("checks username is correct", () => {
         expect(testUser).toHaveProperty("username");

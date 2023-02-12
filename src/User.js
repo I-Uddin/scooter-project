@@ -5,10 +5,12 @@ class User {
     this.password = password;
     this.age = age;
     this.loggedIn = false;
-}
+  }
 
+  // User class has login and logout methods
   login(password) {
-    if (this.password != password) throw new Error("incorrect password")
+    // User cannot login if incorrect password provided
+    if (this.password != password) throw new Error("incorrect password");
     this.loggedIn = true;
   }
 
@@ -17,4 +19,4 @@ class User {
   }
 }
 
-module.exports = User
+module.exports = User;
