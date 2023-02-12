@@ -14,14 +14,14 @@ class ScooterApp {
     if (this.registeredUsers[username] != null)
       throw new Error("already registered");
     if (age < 18) throw new Error("too young to register");
-    this.registeredUsers[username] = { username, password, age };
+    this.registeredUsers[username] = new User(username, password, age);
     console.log("user has been registered");
   }
 
   loginUser(username, password) {
     // User cannot login if not registered or incorrect password provided
     if (this.registeredUsers[username] === undefined)
-      throw new Error("Username or password is incorrect");
+      throw new Error("Username not recognised");
     if (this.registeredUsers[username].password != password)
       throw new Error("Username or password is incorrect");
     this.registeredUsers[username].login(password);
@@ -29,11 +29,11 @@ class ScooterApp {
 
   logoutUser(username) {
     if (this.registeredUsers[username] === undefined)
-      throw new Error("no such user is logged in");
+      throw new Error("no such user recognised");
     // User cannot logout if not logged in
     if (this.registeredUsers[username].loggedIn === false)
       throw new Error("no such user is logged in");
-    this.registerUsers[username].logoutUser();
+    this.registeredUsers[username].logout();
     console.log("user is logged out");
   }
 
