@@ -8,6 +8,7 @@ class ScooterApp {
     this.registeredUsers = registeredUsers;
   }
 
+  // ScooterApp has registerUser, loginUser and logoutUser methods
   registerUser(username, password, age) {
     if (this.registeredUsers[username] != null)
       throw new Error("already registered");

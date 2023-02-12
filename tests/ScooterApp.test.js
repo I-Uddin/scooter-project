@@ -2,19 +2,27 @@ const Scooter = require('../src/Scooter')
 const User = require('../src/User')
 const ScooterApp = require('../src/ScooterApp')
 
+
+// ScooterApp tests here
 describe("ScooterApp tests", () => {
 
     beforeAll(() => {
         testScooterApp = new ScooterApp({"St Pancras": [], "Canary Wharf": [], "Paddington": []}, {"Gary": new User("Gary", "Password", 21), "Steve":new User("Steve", "pass", 12)})
-        testScooterApp.createScooter("St Pancras");
-        testScooterApp.createScooter("St Pancras");
-        testScooterApp.createScooter("Canary Wharf");
-        testScooterApp.createScooter("Canary Wharf");
-        testScooterApp.createScooter("Paddington");
-        testScooterApp.print();
     });
 
-    // ScooterApp tests here
+    // ScooterApp stations and registeredUsers properties initialized correctly
+    describe("scooterApp object", () => {
+        it("checks if stations initialized correctly", () => {
+            expect(testScooterApp).toHaveProperty("stations");
+            expect(testScooterApp.stations).toStrictEqual({"St Pancras": [], "Canary Wharf": [], "Paddington": []});
+        });
+
+        it("checks if registerdUsers initialized correctly", () => {
+            expect(testScooterApp).toHaveProperty("registeredUsers");
+            expect(testScooterApp.registeredUsers).toStrictEqual({"Gary": new User("Gary", "Password", 21), "Steve":new User("Steve", "pass", 12)});
+        });
+    });
+
     
     // register user
     it("checks if user has registered correctly", () => {
