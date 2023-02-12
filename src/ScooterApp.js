@@ -42,7 +42,10 @@ class ScooterApp {
       throw new Error("scooter already at station");
     this.stations[station].push(scooter);
     scooter.dock(station);
-    console.log("scooter is docked");
+    // BONUS
+    // Messages logged to the console have more specific information
+    // e.g. scooter #10 is docked instead of scooter is docked
+    console.log(`scooter #${scooter.serial} is docked`);
   }
 
   rentScooter(scooter, user) {
