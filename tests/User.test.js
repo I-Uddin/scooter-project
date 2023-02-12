@@ -38,3 +38,31 @@ describe("User tests", () => {
     });
     
 });
+
+describe("user checklist tests", () => {
+
+    beforeEach(() => {
+        testUser = new User("Testy", "password", 21);
+      });
+
+    it("logs user in correctly", () => {
+        expect(testUser.loggedIn).toBe(false);
+        testUser.login("password");
+        expect(testUser.loggedIn).toBe(true);
+    })
+
+    it("logs user out correctly", () => {
+        testUser.loggedIn = true;
+        expect(testUser.loggedIn).toBe(true);
+        testUser.logout();
+        expect(testUser.loggedIn).toBe(false);
+    })
+
+    // User cannot login if incorrect password provided
+    it("doesn't log user in with incorrect password", () => {
+        expect(testUser.loggedIn).toBe(false);
+        expect(() => {
+            testUser.login("incorrect password");
+        }).toThrow(new Error("incorrect password"));
+    })
+});
