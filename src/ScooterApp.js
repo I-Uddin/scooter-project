@@ -62,17 +62,15 @@ class ScooterApp {
   rentScooter(scooter, user) {
     // Scooter cannot be rented if it is already rented
     if (scooter.user != null) throw new Error("scooter already rented");
-    this.stations[scooter.station].splice(indexOf(scooter), 1);
-    scooter.user = user;
+    this.stations[scooter.station].splice(this.stations[scooter.station].indexOf(scooter), 1);
+    scooter.rent(user);
     console.log("scooter is rented");
   }
   
   // ScooterApp methods log messages to the console as specified
   // ScooterApp has print method
   print() {
-    for (let userKey in this.registeredUsers)
-      console.log(this.registeredUsers[userKey]);
-    console.log(this.stations);
+    console.log(this.registeredUsers,this.stations);
   }
 }
 
