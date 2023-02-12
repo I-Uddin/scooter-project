@@ -29,11 +29,10 @@ describe("scooter object", () => {
     expect(testScooter).toHaveProperty("isBroken");
     expect(testScooter.isBroken).toBe(false);
   });
-  });
+});
 
 //Method tests
 describe("scooter methods", () => {
-
   beforeEach(() => {
     testScooter = new Scooter("St Pancras");
   });
@@ -41,21 +40,52 @@ describe("scooter methods", () => {
 
   //rent method
   it("checks if scooter rents correctly", () => {
-    testScooter.rent();
+    let testUser = new User("a", "pass", 20);
+    testScooter.rent(testUser);
+    expect(testScooter.user).toBe(testUser);
   });
+
+  // Scooter cannot be rented if it is low on charge or broken
+  it("checks if scooter cannot be rented if it is low on charge", () => {
+    let testUser = new User("a", "pass", 20);
+    testScooter.charge = 0;
+    expect(() => {
+      testScooter.rent(testUser)
+    }).toThrow(new Error("scooter needs to charge"));
+  });
+
+  it("checks if scooter cannot be rented if it is broken", () => {
+    let testUser = new User("a", "pass", 20);
+    testScooter.isBroken = true;
+    expect(() => {
+      testScooter.rent(testUser);
+    }).toThrow(new Error("scooter needs repair"));
+  });
+
   //dock method
-  it("checks if scooter docks correctly", () => {});
+  it("checks if scooter docks correctly", () => {
+    testScooter.dock("Paddington");
+    expect(testScooter.station).toBe("Paddington");
+  });
+
   //requestRepair method
   it("checks if scooter repairs correctly", () => {
     testScooter.isBroken = true;
-    console.log(testScooter.isBroken);
     testScooter.requestRepair();
-    console.log(testScooter.isBroken);
+    setTimeout(() => {
+      expect(testScooter.isBroken).toBe(false);
+    }, 6000);
   });
+
   //charge method
   it("checks if scooter charges correctly", () => {
-    testScooter.charge = 0;
+    testScooter.charge = 80;
     testScooter.recharge();
-    expect(testScooter.charge).toBe(100);
+    setTimeout(() => {
+      expect(testScooter.charge).toBe(100);
+    }, 4500);
   });
 });
+
+// Scooter class has nextSerial class property used to assign unique serial numbers
+describe("scooter coding rooms checklist", () => {});
